@@ -1,0 +1,34 @@
+{
+  "name": "ab224qr-examination-3",
+  "version": "1.0.0",
+  "description": "Examination Assignment 3 - Into the wilds",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "devstart": "nodemon --inspect ./app.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1dv023/ab224qr-examination-3.git"
+  },
+  "author": "Adam Bergman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1dv023/ab224qr-examination-3/issues"
+  },
+  "homepage": "https://github.com/1dv023/ab224qr-examination-3#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-hbs": "^2.0.2",
+    "helmet": "^3.15.1",
+    "mongoose": "^5.4.17",
+    "standard": "^12.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "nodemonConfig": {
+    "ext": "js,json,hbs,html,css"
+  }
+}
