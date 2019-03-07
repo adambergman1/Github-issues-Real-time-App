@@ -52,8 +52,8 @@ app.use((err, req, res, next) => {
 
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    defaultSrc: ['self'],
-    styleSrc: ['self', 'https://cdnjs.cloudflare.com', 'https://use.fontawesome.com'],
-    scriptSrc: ['self', 'https://cdnjs.cloudflare.com', 'https://api.github.com', 'https://developer.github.com']
+    defaultSrc: ["'self'"],
+    styleSrc: ["'self'", "'https://cdnjs.cloudflare.com'", "'https://use.fontawesome.com'"],
+    scriptSrc: ["'self'", "'https://cdnjs.cloudflare.com'", "'https://api.github.com'", "'https://developer.github.com'"]
   }
 }))
