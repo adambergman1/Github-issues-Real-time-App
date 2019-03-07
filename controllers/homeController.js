@@ -31,7 +31,6 @@ homeController.index = async (req, res, next) => {
   } catch (err) {
     console.log(err)
   }
-  // res.render('home/index')
 }
 
 // Exports.

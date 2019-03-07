@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('express-hbs')
+const helmet = require('helmet')
 
 const app = express()
 const port = 3000
@@ -48,3 +49,11 @@ app.use((err, req, res, next) => {
     res.send(err.message || 'Internal Server Error')
   }
 })
+
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ['self'],
+    styleSrc: ['self', 'https://cdnjs.cloudflare.com', 'https://use.fontawesome.com'],
+    scriptSrc: ['self', 'https://cdnjs.cloudflare.com', 'https://api.github.com', 'https://developer.github.com']
+  }
+}))
