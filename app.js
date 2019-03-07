@@ -5,7 +5,16 @@ const hbs = require('express-hbs')
 const app = express()
 const port = 3000
 
-app.listen(port, () => console.log(`Server running on http://localhost:${port}/`))
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
+io.on('connection', socket => {
+  socket.on('issues', data => {
+    console.log(data)
+  })
+})
+server.listen(port, () => console.log(`Server running on http://localhost:${port}/`))
+
+// app.listen(port, () => console.log(`Server running on http://localhost:${port}/`))
 
 // view engine setup
 app.engine('hbs', hbs.express4({

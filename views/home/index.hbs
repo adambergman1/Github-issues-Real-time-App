@@ -1,4 +1,3 @@
-<div class="jumbotron">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
@@ -8,7 +7,7 @@
     <p>
       Ever wanted to have all your issues from Github in one place? You have come to the right place!
     </p>
-    
+    <hr>
       </div>
     </div>
   </div>
@@ -16,8 +15,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <p>Lorem ipsum dolor set.</p>
-      <table>
+      <h3>Your issues</h3>
+      <table class="responsive-table striped">
         <thead>
           <th>ID</th>
           <th>Title</th>
@@ -31,15 +30,14 @@
     {{#each issues}}
     <tr>
       <td>{{this.id}}</td>
-      <td>{{this.issue}}</td>
+      <td><a href="{{this.url}}" target="_blank">{{this.issue}}</a></td>
       <td>{{this.description}}</td>
       <td>{{this.comments}}</td>
       <td>{{this.state}}</td>
-      <td>{{this.created}}</td>
+      <td>{{this.created}} - {{this.time}}</td>
     </tr>
     {{/each}}
     {{/if}}
         </tbody>
       </table>
-  </div>
 </div>
