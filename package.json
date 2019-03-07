@@ -23,6 +23,7 @@
     "dotenv-safe": "^6.1.0",
     "express": "^4.16.4",
     "express-hbs": "^2.0.2",
+    "express-ws": "^4.0.0",
     "helmet": "^3.15.1",
     "mongoose": "^5.4.17",
     "node-fetch": "^2.3.0",

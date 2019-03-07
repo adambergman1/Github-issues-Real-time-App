@@ -17,6 +17,29 @@
   <div class="row">
     <div class="col-md-12">
       <p>Lorem ipsum dolor set.</p>
+      <table>
+        <thead>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Comments</th>
+          <th>State</th>
+          <th>Created</th>
+        </thead>
+        <tbody>
+  {{#if issues.length}}
+    {{#each issues}}
+    <tr>
+      <td>{{this.id}}</td>
+      <td>{{this.issue}}</td>
+      <td>{{this.description}}</td>
+      <td>{{this.comments}}</td>
+      <td>{{this.state}}</td>
+      <td>{{this.created}}</td>
+    </tr>
+    {{/each}}
+    {{/if}}
+        </tbody>
+      </table>
   </div>
-  <hr />
 </div>
