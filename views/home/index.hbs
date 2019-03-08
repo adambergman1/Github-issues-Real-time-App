@@ -26,18 +26,16 @@
           <th>Created</th>
         </thead>
         <tbody>
-  {{#if issues.length}}
     {{#each issues}}
-    <tr>
-      <td>{{this.id}}</td>
-      <td><a href="{{this.url}}" target="_blank">{{this.issue}}</a></td>
-      <td>{{this.description}}</td>
-      <td>{{this.comments}}</td>
-      <td>{{this.state}}</td>
-      <td>{{this.created}} - {{this.time}}</td>
+    <tr class="list-of-issues">
+      <td class="issue-id">{{this.id}}</td>
+      <td class="issue-title"><a href="{{this.url}}" target="_blank">{{this.issue}}</a></td>
+      <td class="issue-description">{{this.description}}</td>
+      <td class="issue-comments">{{this.comments}}</td>
+      <td class="issue-state">{{this.state}}</td>
+      <td class="issue-date">{{this.created}} - {{this.time}}</td>
     </tr>
     {{/each}}
-    {{/if}}
         </tbody>
       </table>
 </div>
