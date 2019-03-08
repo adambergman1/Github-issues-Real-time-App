@@ -2,9 +2,10 @@ const socket = io.connect()
 
 console.log('Hello from js folder')
 
-socket.on('issue', issues => {
+socket.on('issue', issue => {
+  console.log('Should add the issues from client side')
   // Format what we get from GitHub
-  issues = issues.issues.map(issue => ({
+  issue = issue.issues.map(issue => ({
     id: issue.number,
     issue: issue.title,
     description: issue.body,
@@ -14,13 +15,36 @@ socket.on('issue', issues => {
     time: issue.created_at.substr(11, 5),
     url: issue.html_url
   }))
-
-  const table = document.querySelector('.list-of-issues')
-  // Add to the DOM
-  issues.forEach(issue => {
-    let idDiv = document.createElement('p')
-    idDiv.textContent = issue.id
-    idDiv.appendChild(table)
-    console.log(issue.id)
-  })
+  addIssue(issue)
 })
+
+function addIssue (issues) {
+  // Add to the DOM
+  const tbody = document.querySelector('.list-of-issues')
+  issues.forEach(issue => {
+    const tr = document.createElement('tr')
+
+    const issueID = document.createElement('td')
+    const issueTitle = document.createElement('td')
+    const issueDescription = document.createElement('td')
+    const issueComments = document.createElement('td')
+    const issueState = document.createElement('td')
+    const issueCreatedAt = document.createElement('td')
+
+    issueID.textContent = issue.id
+    issueTitle.textContent = issue.issue
+    issueDescription.textContent = issue.description
+    issueComments.textContent = issue.comments
+    issueState.textContent = issue.state
+    issueCreatedAt.textContent = issue.created + ' - ' + issue.time
+
+    tr.appendChild(issueID)
+    tr.appendChild(issueTitle)
+    tr.appendChild(issueDescription)
+    tr.appendChild(issueComments)
+    tr.appendChild(issueState)
+    tr.appendChild(issueCreatedAt)
+
+    tbody.appendChild(tr)
+  })
+}

@@ -18,39 +18,27 @@ app.use(helmet.contentSecurityPolicy({
   }
 }))
 
-app.set('etag', 'strong')
-
 const server = require('http').createServer(app)
 server.listen(port, () => console.log(`Server running on http://localhost:${port}/`))
 
-// additional middleware
+// middleware
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
+// Routes
+app.use('/', require('./routes/homeRouter'))
+app.use('/webhook', require('./routes/webhook'))
+
+// Set socket.io listeners
 const io = require('socket.io')(server)
-const fetchGitHub = require('./src/js/fetch')
 
-// Set socket.io listeners.
 io.on('connection', async socket => {
-  try {
-    let result = await fetchGitHub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
-    io.emit('issue', { issues: result })
-  } catch (err) {
-    console.log(err)
-  }
+  console.log('Opened a websocket connection')
+  const fetchGithub = require('./src/js/fetch')
+  let issues = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
+  io.emit('issue', { issues: issues })
 })
-
-app.post('/webhook', (req, res, next) => {
-  let parsedBody = JSON.parse(req.body)
-  let body = req.body
-
-  console.log('headers', req.headers)
-  console.log('body', body)
-
-  res.sendStatus(200)
-})
-
-// app.listen(port, () => console.log(`Server running on http://localhost:${port}/`))
+app.set('socketio', io)
 
 // view engine setup
 app.engine('hbs', hbs.express4({
@@ -60,22 +48,16 @@ app.engine('hbs', hbs.express4({
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'views'))
 
-// Routes
-app.use('/', require('./routes/homeRouter'))
-
 // catch 404
 app.use((req, res, next) => {
-  res.status(404)
-  res.sendFile(path.join(__dirname, 'public', '404.html'))
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'))
 })
 
 // error handler
 app.use((err, req, res, next) => {
   if (err.message === '403') {
-    res.status(err.status || '403')
-    res.sendFile(path.join(__dirname, 'public', '403.html'))
+    res.status(err.status || '403').sendFile(path.join(__dirname, 'public', '403.html'))
   } else if (err.status === '500') {
-    res.status(err.status || 500)
-    res.send(err.message || 'Internal Server Error')
+    res.status(err.status || 500).send(err.message || 'Internal Server Error')
   }
 })
