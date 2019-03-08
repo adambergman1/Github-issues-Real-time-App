@@ -6,6 +6,18 @@ const helmet = require('helmet')
 const app = express()
 const port = 3000
 
+app.use(helmet())
+
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    styleSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com'],
+    scriptSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com', 'api.github.com', 'developer.github.com', 'use.fontawesome.com'],
+    upgradeInsecureRequests: true,
+    workerSrc: false // This is not set.
+  }
+}))
+
 // const server = require('http').createServer(app)
 // const io = require('socket.io')(server)
 
@@ -49,11 +61,3 @@ app.use((err, req, res, next) => {
     res.send(err.message || 'Internal Server Error')
   }
 })
-
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    styleSrc: ["'self'", "'https://cdnjs.cloudflare.com'", "'https://use.fontawesome.com'"],
-    scriptSrc: ["'self'", "'https://cdnjs.cloudflare.com'", "'https://api.github.com'", "'https://developer.github.com'"]
-  }
-}))

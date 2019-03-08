@@ -4,19 +4,15 @@
  * @author Adam Bergman
  * @version 1.0
  */
+
+const fetchGitHub = require('../src/js/fetch')
 const homeController = {}
-const github = require('octonode')
-
-require('dotenv').config()
-
-const client = github.client(process.env.ACCESS_TOKEN)
-const ghrepo = client.repo('1dv023/ab224qr-examination-3')
 
 homeController.index = async (req, res, next) => {
   try {
-    let result = await ghrepo.issuesAsync()
+    let result = await fetchGitHub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
 
-    result = result[0].map(issue => ({
+    result = result.map(issue => ({
       id: issue.number,
       issue: issue.title,
       description: issue.body,
