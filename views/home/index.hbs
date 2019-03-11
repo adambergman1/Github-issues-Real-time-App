@@ -27,9 +27,9 @@
         </thead>
         <tbody class="list-of-issues">
     {{#each issues}}
-    <tr id="issue-{{this.id}}">
-      <td class="issue-id">{{this.number}}</td>
-      <td class="issue-title"><a href="{{this.url}}" target="_blank">{{this.title}}</a></td>
+    <tr class="issue" id="issue-{{this.id}}">
+      <td class="issue-number">{{this.number}}</td>
+      <td class="issue-title"><a href="{{this.url}}" target="_blank" class="issue-title-link">{{this.title}}</a></td>
       <td class="issue-description">{{this.description}}</td>
       <td class="issue-comments">{{this.comments}}</td>
       <td class="issue-state">{{this.state}}</td>

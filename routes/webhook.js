@@ -35,6 +35,10 @@ router
         id: issue.id, action: body.action, comments: issue.comments
       })
     }
+
+    if (body.action === 'opened') {
+      io.emit('newIssue', issue)
+    }
     res.sendStatus(200)
   })
 

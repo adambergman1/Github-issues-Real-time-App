@@ -4,38 +4,25 @@ console.log('Hello from js folder')
 
 socket.on('changeCommentCount', issue => {
   console.log('Adding updates to a comment')
-  const currentIssue = document.querySelector(`#issue-${issue.id} .issue-comments`)
-  currentIssue.textContent = issue.comments + 1
-  console.log(currentIssue)
+  const currentIssueComments = document.querySelector(`#issue-${issue.id} .issue-comments`)
+  currentIssueComments.textContent = issue.comments + 1
 })
 
-// function addIssue (issues) {
-//   // Add to the DOM
-//   const tbody = document.querySelector('.list-of-issues')
-//   issues.forEach(issue => {
-//     const tr = document.createElement('tr')
+socket.on('newIssue', issue => {
+  console.log('Receiving new issue')
+  console.log(issue.title)
 
-//     const issueID = document.createElement('td')
-//     const issueTitle = document.createElement('td')
-//     const issueDescription = document.createElement('td')
-//     const issueComments = document.createElement('td')
-//     const issueState = document.createElement('td')
-//     const issueCreatedAt = document.createElement('td')
+  let mainDiv = document.querySelector('.list-of-issues')
+  const issueClone = document.querySelector('.issue')
+  let template = document.importNode(issueClone, true)
 
-//     issueID.textContent = issue.id
-//     issueTitle.textContent = issue.issue
-//     issueDescription.textContent = issue.description
-//     issueComments.textContent = issue.comments
-//     issueState.textContent = issue.state
-//     issueCreatedAt.textContent = issue.created + ' - ' + issue.time
+  template.querySelector('.issue-number').textContent = issue.number
+  template.querySelector('.issue-title-link').textContent = issue.title
+  template.querySelector('.issue-title-link').setAttribute('href', issue.url)
+  template.querySelector('.issue-description').textContent = issue.description
+  template.querySelector('.issue-comments').textContent = issue.comments
+  template.querySelector('.issue-state').textContent = issue.state
+  template.querySelector('.issue-date').textContent = `${issue.created} - ${issue.time}`
 
-//     tr.appendChild(issueID)
-//     tr.appendChild(issueTitle)
-//     tr.appendChild(issueDescription)
-//     tr.appendChild(issueComments)
-//     tr.appendChild(issueState)
-//     tr.appendChild(issueCreatedAt)
-
-//     tbody.appendChild(tr)
-//   })
-// }
+  mainDiv.insertBefore(template, issueClone)
+})
