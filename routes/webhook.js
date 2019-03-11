@@ -12,6 +12,7 @@ router.post('/', async (req, res) => {
   const io = req.app.get('socketio')
 
   let body = JSON.parse(req.body)
+  console.log(body.action)
 
   const issue = {
     id: body.issue.id.toString(),
@@ -35,6 +36,9 @@ router.post('/', async (req, res) => {
   }
   if (body.action === 'closed') {
     io.emit('closed', { id: issue.id })
+  }
+  if (body.action === 'edited') {
+    io.emit('edited', issue)
   }
 
   res.sendStatus(200)

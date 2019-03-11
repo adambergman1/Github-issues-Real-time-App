@@ -14,6 +14,15 @@ socket.on('closed', issue => {
   currentIssue.parentNode.removeChild(currentIssue)
 })
 
+socket.on('edited', issue => {
+  // Editing the title and/or description
+  const currentIssueTitle = document.querySelector(`#issue-${issue.id} .issue-title-link`)
+  const currentIssueDescription = document.querySelector(`#issue-${issue.id} .issue-description`)
+  currentIssueTitle.textContent = issue.title
+  currentIssueTitle.setAttribute('href', issue.url)
+  currentIssueDescription.textContent = issue.description
+})
+
 socket.on('newIssue', issue => {
   // Creating a new issue
   let mainDiv = document.querySelector('.list-of-issues')
