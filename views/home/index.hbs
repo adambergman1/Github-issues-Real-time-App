@@ -38,4 +38,25 @@
     {{/each}}
         </tbody>
       </table>
+
 </div>
+
+{{#each issues}}
+    <div class="row center-align">
+    <div class="col s12 m6 center-align">
+      <div class="card blue-grey darken-1 issue center-align" id="issue-{{this.id}}">
+        <div class="card-content white-text">
+          <p class="issue-number">{{this.number}}.</p>
+          <a href="{{this.url}}" target="_blank" class="issue-title-link white-text">
+            <span class="card-title issue-title">{{this.title}}</span>
+          </a>
+          <p class="issue-description">{{this.description}}</p>
+        </div>
+        <div class="card-action">
+          <p class="issue-comments">{{this.comments}} Comments</p>
+          <p class="issue-date">Created: {{this.created}} - {{this.time}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/each}}
