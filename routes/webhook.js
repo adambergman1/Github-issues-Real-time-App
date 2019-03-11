@@ -13,23 +13,28 @@ router
 //   console.log(res)
 //   res.sendStatus(200)
 // })
-  .post('/webhook', async (req, res) => {
-    const io = req.app.get('io')
-    console.log(io)
+  .post('/', async (req, res) => {
+    const io = req.app.get('socketio')
 
-    //   let body = req.body
+    let body = JSON.parse(req.body)
+    // console.log(body)
 
-    //   console.log('headers', req.headers)
-    //   console.log('body', body)
-
-    try {
-      const fetchGithub = require('./src/js/fetch')
-      let result = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
-      io.emit('issue', { issues: result })
-    } catch (err) {
-      console.log(err)
+    const issue = {
+      id: body.issue.id.toString(),
+      number: body.issue.number,
+      title: body.issue.title,
+      description: body.issue.body,
+      comments: body.issue.comments,
+      state: body.issue.state,
+      created: body.issue.created_at.substr(0, 10),
+      time: body.issue.created_at.substr(11, 5),
+      url: body.issue.html_url
     }
-
+    if (body.action === 'created') {
+      io.emit('changeCommentCount', {
+        id: issue.id, action: body.action, comments: issue.comments
+      })
+    }
     res.sendStatus(200)
   })
 

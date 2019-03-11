@@ -15,7 +15,8 @@ router.get('/', async (req, res, next) => {
   let result = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
 
   result = result.map(issue => ({
-    id: issue.number,
+    id: issue.id,
+    number: issue.number,
     title: issue.title,
     description: issue.body,
     comments: issue.comments,

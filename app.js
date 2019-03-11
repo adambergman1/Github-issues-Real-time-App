@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const bodyParser = require('body-parser')
 const hbs = require('express-hbs')
 const helmet = require('helmet')
 
@@ -22,7 +23,7 @@ const server = require('http').createServer(app)
 server.listen(port, () => console.log(`Server running on http://localhost:${port}/`))
 
 // middleware
-app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.raw({ type: 'application/json' }))
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes
@@ -34,9 +35,10 @@ const io = require('socket.io')(server)
 
 io.on('connection', async socket => {
   console.log('Opened a websocket connection')
-  const fetchGithub = require('./src/js/fetch')
-  let issues = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
-  io.emit('issue', { issues: issues })
+  return io
+  // const fetchGithub = require('./src/js/fetch')
+  // let issues = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
+  // io.emit('issue', { issues: issues })
 })
 app.set('socketio', io)
 
