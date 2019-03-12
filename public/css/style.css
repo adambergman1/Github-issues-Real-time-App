@@ -10,9 +10,21 @@ footer {
     transition: 0.3s;
 }
 
-.list-of-issues .removing {
+.list-of-issues .removing, .removed {
     background-color: #ff000047 !important;
     transition: 0.3s;
+}
+
+.list-of-issues .removed {
+    font-size: 90%;
+}
+
+.issue-hide-show a {
+    color: #333;
+}
+
+.removed td {
+    padding: 5px;
 }
 
 .issue-description .description {
@@ -24,4 +36,8 @@ footer {
     font-size: 90%;
     color: #666;
     width: 20%;
+}
+
+.hidden {
+    display: none;
 }

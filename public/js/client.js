@@ -25,10 +25,10 @@ socket.on('closed', issue => {
   currentIssueState.textContent = issue.state
   currentIssue.classList.add('removing')
 
-  setTimeout(function () {
-    const currentIssue = document.querySelector(`#issue-${issue.id}`)
-    currentIssue.parentNode.removeChild(currentIssue)
-  }, 3000)
+  // setTimeout(function () {
+  //   const currentIssue = document.querySelector(`#issue-${issue.id}`)
+  //   currentIssue.parentNode.removeChild(currentIssue)
+  // }, 3000)
 })
 
 socket.on('edited', issue => {
@@ -59,3 +59,21 @@ socket.on('newIssue', issue => {
 
   setTimeout(function () { template.classList.remove('adding') }, 3000)
 })
+
+window.onload = function () {
+  let stateDiv = document.querySelectorAll('.issue-state')
+
+  stateDiv.forEach(state => {
+    if (state.textContent === 'closed') {
+      state.parentNode.classList.add('removed')
+    }
+  })
+
+  let hideBtn = document.querySelectorAll('.issue-hide-show a')
+  hideBtn.forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault()
+      btn.parentNode.parentNode.classList.add('hidden')
+    })
+  })
+}

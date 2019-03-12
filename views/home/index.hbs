@@ -1,13 +1,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-    <h1 class="display-3">
-      GitIssues
-    </h1>
     <p>
       Ever wanted to have all your issues from Github in one place? You have come to the right place!
     </p>
-    <hr>
+    <div class="divider"></div>
       </div>
     </div>
   </div>
@@ -24,6 +21,7 @@
           <th><i class="fas fa-comments" title="Comments"></i></th>
           <th><i class="fas fa-door-open" title="State"></i></th>
           <th><i class="fas fa-clock" title="Created"></i></th>
+          <th><i class="fas fa-eye" title="Show/hide"></i></th>
         </thead>
         <tbody class="list-of-issues">
     {{#each issues}}
@@ -34,6 +32,7 @@
       <td class="issue-comments">{{this.comments}}</td>
       <td class="issue-state">{{this.state}}</td>
       <td class="issue-date">{{this.created}} {{this.time}}</td>
+      <td class="issue-hide-show"><a href="#">x</a></td>
     </tr>
     {{/each}}
         </tbody>
