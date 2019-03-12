@@ -14,3 +14,14 @@ footer {
     background-color: #ff000047 !important;
     transition: 0.3s;
 }
+
+.issue-description .description {
+	max-height: 60px;
+	overflow-y: scroll;
+}
+
+.issue .issue-date {
+    font-size: 90%;
+    color: #666;
+    width: 20%;
+}

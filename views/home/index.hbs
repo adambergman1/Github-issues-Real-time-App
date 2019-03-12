@@ -18,22 +18,22 @@
       <h3>Your issues</h3>
       <table class="responsive-table striped">
         <thead>
-          <th>No.</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Comments</th>
-          <th>State</th>
-          <th>Created</th>
+          <th class="number-heading"><i class="fas fa-sort-numeric-up" title="Number"></i></th>
+          <th><i class="fas fa-heading" title="Title"></i></th>
+          <th><i class="fas fa-align-left" title="Description"></i></th>
+          <th><i class="fas fa-comments" title="Comments"></i></th>
+          <th><i class="fas fa-door-open" title="State"></i></th>
+          <th><i class="fas fa-clock" title="Created"></i></th>
         </thead>
         <tbody class="list-of-issues">
     {{#each issues}}
     <tr class="issue" id="issue-{{this.id}}">
       <td class="issue-number">{{this.number}}</td>
       <td class="issue-title"><a href="{{this.url}}" target="_blank" class="issue-title-link">{{this.title}}</a></td>
-      <td class="issue-description">{{this.description}}</td>
+      <td class="issue-description"><div class="description">{{this.description}}</div></td>
       <td class="issue-comments">{{this.comments}}</td>
       <td class="issue-state">{{this.state}}</td>
-      <td class="issue-date">{{this.created}} - {{this.time}}</td>
+      <td class="issue-date">{{this.created}} {{this.time}}</td>
     </tr>
     {{/each}}
         </tbody>

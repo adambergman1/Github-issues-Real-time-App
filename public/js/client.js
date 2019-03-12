@@ -1,7 +1,5 @@
 const socket = window.io.connect()
 
-console.log('Hello from public JS folder')
-
 socket.on('addComment', issue => {
   // Increasing comment count with one
   const currentIssueComments = document.querySelector(`#issue-${issue.id} .issue-comments`)
@@ -36,7 +34,7 @@ socket.on('closed', issue => {
 socket.on('edited', issue => {
   // Editing the title and/or description
   const currentIssueTitle = document.querySelector(`#issue-${issue.id} .issue-title-link`)
-  const currentIssueDescription = document.querySelector(`#issue-${issue.id} .issue-description`)
+  const currentIssueDescription = document.querySelector(`#issue-${issue.id} .issue-description .description`)
   currentIssueTitle.textContent = issue.title
   currentIssueTitle.setAttribute('href', issue.url)
   currentIssueDescription.textContent = issue.description
@@ -55,7 +53,7 @@ socket.on('newIssue', issue => {
   template.querySelector('.issue-description').textContent = issue.description
   template.querySelector('.issue-comments').textContent = issue.comments
   template.querySelector('.issue-state').textContent = issue.state
-  template.querySelector('.issue-date').textContent = `${issue.created} - ${issue.time}`
+  template.querySelector('.issue-date').textContent = `${issue.created} ${issue.time}`
 
   mainDiv.insertBefore(template, issueClone)
 
