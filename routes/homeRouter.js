@@ -12,16 +12,16 @@ const fetchGithub = require('../src/js/fetch')
 
 // Fetch all issues from Github and send them to the index hbs file
 router.get('/', async (req, res, next) => {
-  const openIssues = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues?state=open')
+  const openIssues = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
   const closedIssues = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues?state=closed')
 
-  const mergedFetches = openIssues.concat(closedIssues)
+  // const mergedFetches = openIssues.concat(closedIssues)
 
-  mergedFetches.sort(function (a, b) {
-    return b.number - a.number
-  })
+  // mergedFetches.sort(function (a, b) {
+  //   return b.number - a.number
+  // })
 
-  const issues = mergedFetches.map(issue => ({
+  const issues = openIssues.map(issue => ({
     id: issue.id,
     number: issue.number,
     title: issue.title,

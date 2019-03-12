@@ -7,35 +7,37 @@ footer {
 
 .list-of-issues .adding {
     background-color: #90ee905c !important;
-    transition: 0.3s;
 }
 
 .list-of-issues .removing, .removed {
     background-color: #ff000047 !important;
-    transition: 0.3s;
 }
 
 .list-of-issues .removed {
     font-size: 90%;
 }
 
-.issue-hide-show a {
+.list-of-issues .issue-hide-show a {
     color: #333;
 }
 
-.removed td {
+.list-of-issues .removed td {
     padding: 5px;
 }
 
-.issue-description .description {
+.list-of-issues .issue-description .description {
 	max-height: 60px;
-	overflow-y: scroll;
+    overflow-y: scroll;
+    color: #333;
 }
 
-.issue .issue-date {
+.list-of-issues .issue .issue-date {
     font-size: 90%;
-    color: #666;
     width: 20%;
+}
+
+.issue-comments, .issue-state, .issue-date {
+    color: #666;
 }
 
 .hidden {
