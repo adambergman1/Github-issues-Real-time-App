@@ -4,3 +4,13 @@ footer {
     width: 100%;
     height: 100px;
 }
+
+.list-of-issues .adding {
+    background-color: #90ee905c !important;
+    transition: 0.3s;
+}
+
+.list-of-issues .removing {
+    background-color: #ff000047 !important;
+    transition: 0.3s;
+}

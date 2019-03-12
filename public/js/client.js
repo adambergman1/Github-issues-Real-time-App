@@ -1,17 +1,36 @@
-const socket = window.io.connect('https://d74e410a.ngrok.io')
+const socket = window.io.connect()
 
 console.log('Hello from public JS folder')
 
-socket.on('changeComments', issue => {
-  // Updating comment count for the issue
+socket.on('addComment', issue => {
+  // Increasing comment count with one
   const currentIssueComments = document.querySelector(`#issue-${issue.id} .issue-comments`)
   currentIssueComments.textContent = issue.comments + 1
+  currentIssueComments.classList.add('adding')
+
+  setTimeout(function () { currentIssueComments.classList.remove('adding') }, 3000)
+})
+
+socket.on('removeComment', issue => {
+  // Decreasing comment count with one
+  const currentIssueComments = document.querySelector(`#issue-${issue.id} .issue-comments`)
+  currentIssueComments.textContent = issue.comments - 1
+  currentIssueComments.classList.add('removing')
+
+  setTimeout(function () { currentIssueComments.classList.remove('removing') }, 3000)
 })
 
 socket.on('closed', issue => {
   // Removing the issue
   const currentIssue = document.querySelector(`#issue-${issue.id}`)
-  currentIssue.parentNode.removeChild(currentIssue)
+  const currentIssueState = currentIssue.querySelector('.issue-state')
+  currentIssueState.textContent = issue.state
+  currentIssue.classList.add('removing')
+
+  setTimeout(function () {
+    const currentIssue = document.querySelector(`#issue-${issue.id}`)
+    currentIssue.parentNode.removeChild(currentIssue)
+  }, 3000)
 })
 
 socket.on('edited', issue => {
@@ -28,6 +47,7 @@ socket.on('newIssue', issue => {
   let mainDiv = document.querySelector('.list-of-issues')
   const issueClone = document.querySelector('.issue')
   let template = document.importNode(issueClone, true)
+  template.classList.add('adding')
 
   template.querySelector('.issue-number').textContent = issue.number
   template.querySelector('.issue-title-link').textContent = issue.title
@@ -38,4 +58,6 @@ socket.on('newIssue', issue => {
   template.querySelector('.issue-date').textContent = `${issue.created} - ${issue.time}`
 
   mainDiv.insertBefore(template, issueClone)
+
+  setTimeout(function () { template.classList.remove('adding') }, 3000)
 })

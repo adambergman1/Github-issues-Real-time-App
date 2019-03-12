@@ -7,11 +7,12 @@
 
 const express = require('express')
 const router = express.Router()
+const verifyGithubPayload = require('../src/js/verifyGitHub')
 
-router.post('/', async (req, res) => {
+router.post('/', verifyGithubPayload, (req, res) => {
   const io = req.app.get('socketio')
 
-  let body = JSON.parse(req.body)
+  const body = JSON.parse(req.body)
   console.log(body.action)
 
   const issue = {
@@ -26,19 +27,19 @@ router.post('/', async (req, res) => {
     url: body.issue.html_url
   }
   if (body.action === 'created') {
-    io.emit('changeComments', {
-      id: issue.id,
-      comments: issue.comments
-    })
+    io.emit('addComment', issue)
   }
-  if (body.action === 'opened') {
+  if (body.action === 'opened' || body.action === 'reopened') {
     io.emit('newIssue', issue)
   }
   if (body.action === 'closed') {
-    io.emit('closed', { id: issue.id })
+    io.emit('closed', issue)
   }
   if (body.action === 'edited') {
     io.emit('edited', issue)
+  }
+  if (body.action === 'deleted') {
+    io.emit('removeComment', issue)
   }
 
   res.sendStatus(200)

@@ -13,7 +13,7 @@ app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
     styleSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com'],
-    scriptSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com', 'api.github.com', 'developer.github.com', 'use.fontawesome.com', 'cdn.socket.io'],
+    scriptSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com', 'use.fontawesome.com'],
     upgradeInsecureRequests: true,
     workerSrc: false // This is not set.
   }
@@ -33,12 +33,8 @@ app.use('/webhook', require('./routes/webhook'))
 // Set socket.io listeners
 const io = require('socket.io')(server)
 
-io.on('connection', async socket => {
+io.on('connection', socket => {
   console.log('Opened a websocket connection')
-  return io
-  // const fetchGithub = require('./src/js/fetch')
-  // let issues = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
-  // io.emit('issue', { issues: issues })
 })
 app.set('socketio', io)
 

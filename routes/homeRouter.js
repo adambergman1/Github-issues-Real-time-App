@@ -12,9 +12,9 @@ const fetchGithub = require('../src/js/fetch')
 
 // Fetch all issues from Github and send them to the index hbs file
 router.get('/', async (req, res, next) => {
-  let result = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
+  const result = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
 
-  result = result.map(issue => ({
+  const issues = result.map(issue => ({
     id: issue.id,
     number: issue.number,
     title: issue.title,
@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
     time: issue.created_at.substr(11, 5),
     url: issue.html_url
   }))
-  res.render('home/index', { issues: result })
+  res.render('home/index', { issues })
 })
 
 // Exports.
