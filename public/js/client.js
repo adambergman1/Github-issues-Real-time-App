@@ -60,20 +60,20 @@ socket.on('newIssue', issue => {
   setTimeout(function () { template.classList.remove('adding') }, 3000)
 })
 
-// window.onload = function () {
-//   let stateDiv = document.querySelectorAll('.issue-state')
+window.onload = function () {
+  // const stateDiv = document.querySelectorAll('.issue-state')
 
-//   stateDiv.forEach(state => {
-//     if (state.textContent === 'closed') {
-//       state.parentNode.classList.add('removed')
-//     }
-//   })
+  // stateDiv.forEach(state => {
+  //   if (state.textContent === 'closed') {
+  //     state.parentNode.classList.add('removed')
+  //   }
+  // })
 
-//   let hideBtn = document.querySelectorAll('.issue-hide-show a')
-//   hideBtn.forEach(btn => {
-//     btn.addEventListener('click', e => {
-//       e.preventDefault()
-//       btn.parentNode.parentNode.classList.add('hidden')
-//     })
-//   })
-// }
+  let hideBtn = document.querySelectorAll('.issue-hide-show a')
+  hideBtn.forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault()
+      btn.parentNode.parentNode.classList.add('hidden')
+    })
+  })
+}
