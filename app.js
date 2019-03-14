@@ -11,7 +11,7 @@ app.use(helmet())
 
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    defaultSrc: ["'self'"],
+    defaultSrc: ["'self'", 'https://www.youtube.com'],
     styleSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com'],
     scriptSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com', 'use.fontawesome.com'],
     upgradeInsecureRequests: true,

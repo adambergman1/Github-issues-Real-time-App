@@ -26,6 +26,7 @@ router.get('/', async (req, res, next) => {
     number: issue.number,
     title: issue.title,
     description: issue.body,
+    comment: issue.comments_url,
     comments: issue.comments,
     state: issue.state,
     created: issue.created_at.substr(0, 10),

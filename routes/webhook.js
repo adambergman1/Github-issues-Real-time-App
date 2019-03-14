@@ -26,6 +26,11 @@ router.post('/', verifyGithubPayload, (req, res) => {
     time: body.issue.created_at.substr(11, 5),
     url: body.issue.html_url
   }
+
+  if (body.comment) {
+    issue.comment = body.comment.body
+  }
+
   if (body.action === 'created') {
     io.emit('addComment', issue)
   }

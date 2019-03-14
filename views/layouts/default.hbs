@@ -6,8 +6,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="/css/style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-    
     <title>GitIssues</title>
+
+    <template class="notification">
+        <li class="content">
+          <span class="new-comment">New comment:</span> <span class="comment"></span> <span>On issue</span> <span class="title"></span>
+          </li>
+  </template>
+
   </head>
   <body>
     {{>header}}

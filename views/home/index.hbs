@@ -12,29 +12,34 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h3>Your issues</h3>
-      <table class="responsive-table striped">
-        <thead>
-          <th class="number-heading"><i class="fas fa-sort-numeric-up" title="Number"></i></th>
-          <th><i class="fas fa-heading" title="Title"></i></th>
-          <th><i class="fas fa-align-left" title="Description"></i></th>
-          <th><i class="fas fa-comments" title="Comments"></i></th>
-          <th><i class="fas fa-door-open" title="State"></i></th>
-          <th><i class="fas fa-clock" title="Created"></i></th>
-          <th><i class="fas fa-eye" title="Show/hide"></i></th>
-        </thead>
-        <tbody class="list-of-issues">
+      <h3>Your issues</h3> 
+ <div class="list-of-issues two-rows">
+    {{#if issues.length}}
+    <div class="notices">
+      <a href="#" data-target="dropdown" class="dropdown-trigger btn disabled"><i class="fas fa-bell" title="No new notifications"></i></a>
+      </div>
     {{#each issues}}
-    <tr class="issue" id="issue-{{this.id}}">
-      <td class="issue-number">{{this.number}}</td>
-      <td class="issue-title"><a href="{{this.url}}" target="_blank" class="issue-title-link">{{this.title}}</a></td>
-      <td class="issue-description"><div class="description">{{this.description}}</div></td>
-      <td class="issue-comments">{{this.comments}}</td>
-      <td class="issue-state">{{this.state}}</td>
-      <td class="issue-date">{{this.created}} {{this.time}}</td>
-      <td class="issue-hide-show"><a href="#">x</a></td>
-    </tr>
+          <div class="issue" id="issue-{{this.id}}">
+            <span class="issue-hide-show"><a href="#">X</a></span>
+            <span class="issue-number">No. {{this.number}}</span>
+            <h4 class="issue-title"><a href="{{this.url}}" target="_blank" class="issue-title-link">{{this.title}}</a></h4>
+            <div class="issue-description">
+              {{#if this.description}}
+              <p class="description">{{this.description}}</p>
+              {{/if}}
+                {{#unless this.description}}
+                <p class="description not-provided">No description provided.</p>
+                {{/unless}}
+              </div>
+            <p class="issue-state"><i class="fas fa-door-open" title="State"></i> {{this.state}}</p>
+            <div class="comments"><i class="fas fa-comments" title="Comments"></i> <span class="issue-comments">{{this.comments}}</span></div>
+            <p class="issue-date"><i class="fas fa-clock" title="Created"></i> {{this.created}} {{this.time}}</p>
+          </div>
     {{/each}}
-        </tbody>
-      </table>
+    {{/if}}
+    {{#unless issues.length}}
+    <p>No issues to display.</p>
+    {{/unless}}
+  </div>
+<ul id="dropdown" class="dropdown-content notifications"></ul>
 </div>

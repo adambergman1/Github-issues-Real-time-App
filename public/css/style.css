@@ -5,12 +5,39 @@ footer {
     height: 100px;
 }
 
+.notifications .content {
+    padding: 30px 15px;
+}
+
+.notifications .content .comment {
+    font-weight: 600;
+}
+
+.notifications .content .title {
+    font-weight: 600;
+    font-style: italic;
+    font-size: 90%;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+    display: inline;
+    padding: 0;
+}
+
+.dropdown-content {
+    min-width: auto;
+}
+
+.notices {
+    margin-bottom: 20px;
+}
+
 .list-of-issues .adding {
-    background-color: #90ee905c !important;
+    background-color: #2EC4B6 !important;
 }
 
 .list-of-issues .removing, .removed {
-    background-color: #ff000047 !important;
+    background-color: #E71D36 !important;
 }
 
 .list-of-issues .removed {
@@ -31,15 +58,64 @@ footer {
     color: #333;
 }
 
-.list-of-issues .issue .issue-date {
-    font-size: 90%;
-    width: 20%;
-}
-
 .issue-comments, .issue-state, .issue-date {
     color: #666;
 }
 
 .hidden {
     display: none;
+}
+
+.list-of-issues.two-rows .col.s6 {
+    padding: 0 10px 0 0;
+    width: 49%;
+}
+
+.list-of-issues.two-rows .issue {
+    padding: 30px;
+    margin: 0 10px 10px 0;
+    background: #011627;
+    color: #666;
+    -webkit-box-shadow: 7px 4px 25px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 4px 25px 1px rgba(0,0,0,0.75);
+    box-shadow: 7px 4px 25px 1px rgba(0,0,0,0.75);
+    min-height: 380px;
+    max-height: 380px;
+    height: 380px;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+    float: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 48%;
+}
+
+.list-of-issues.two-rows .issue .issue-title a {
+    color: #FF9F1C;
+}
+
+.list-of-issues.two-rows .issue-description .description {
+    color: #FDFFFC;
+    max-height: 90px;
+    font-size: 110%;
+}
+
+.list-of-issues.two-rows .issue-description .description.not-provided {
+    font-style: italic;
+    color: #666;
+}
+
+.list-of-issues.two-rows .issue .issue-date {
+    width: 100%;
+}
+
+.list-of-issues.two-rows .issue .issue-hide-show a {
+    float: right;
+    color: #E71D36;
+}
+
+.fa-external-link-alt {
+    font-size: 13px;
+    vertical-align: top;
 }

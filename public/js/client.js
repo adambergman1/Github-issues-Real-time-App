@@ -6,6 +6,19 @@ socket.on('addComment', issue => {
   currentIssueComments.textContent = issue.comments + 1
   currentIssueComments.classList.add('adding')
 
+  const notificationBtn = document.querySelector('.dropdown-trigger.btn')
+  notificationBtn.textContent = `New notification!`
+  notificationBtn.classList.remove('disabled')
+
+  const notifications = document.querySelector('.notifications')
+  const notification = document.querySelector('.notification')
+  const template = document.importNode(notification.content, true)
+
+  template.querySelector('.comment').textContent = issue.comment
+  template.querySelector('.title').textContent = issue.title
+
+  notifications.appendChild(template)
+
   setTimeout(function () { currentIssueComments.classList.remove('adding') }, 3000)
 })
 
@@ -35,6 +48,7 @@ socket.on('edited', issue => {
   // Editing the title and/or description
   const currentIssueTitle = document.querySelector(`#issue-${issue.id} .issue-title-link`)
   const currentIssueDescription = document.querySelector(`#issue-${issue.id} .issue-description .description`)
+
   currentIssueTitle.textContent = issue.title
   currentIssueTitle.setAttribute('href', issue.url)
   currentIssueDescription.textContent = issue.description
@@ -43,21 +57,21 @@ socket.on('edited', issue => {
 socket.on('newIssue', issue => {
   // Creating a new issue
   let mainDiv = document.querySelector('.list-of-issues')
-  const issueClone = document.querySelector('.issue')
-  let template = document.importNode(issueClone, true)
-  template.classList.add('adding')
+  const issueDiv = document.querySelector('.issue')
+  let issueClone = document.importNode(issueDiv, true)
+  issueClone.classList.add('adding')
 
-  template.querySelector('.issue-number').textContent = issue.number
-  template.querySelector('.issue-title-link').textContent = issue.title
-  template.querySelector('.issue-title-link').setAttribute('href', issue.url)
-  template.querySelector('.issue-description').textContent = issue.description
-  template.querySelector('.issue-comments').textContent = issue.comments
-  template.querySelector('.issue-state').textContent = issue.state
-  template.querySelector('.issue-date').textContent = `${issue.created} ${issue.time}`
+  issueClone.querySelector('.issue-number').textContent = 'No. ' + issue.number
+  issueClone.querySelector('.issue-title-link').textContent = issue.title
+  issueClone.querySelector('.issue-title-link').setAttribute('href', issue.url)
+  issueClone.querySelector('.issue-description').textContent = issue.description
+  issueClone.querySelector('.issue-comments').textContent = issue.comments
+  issueClone.querySelector('.issue-state').textContent = issue.state
+  issueClone.querySelector('.issue-date').textContent = `${issue.created} ${issue.time}`
 
-  mainDiv.insertBefore(template, issueClone)
+  mainDiv.insertBefore(issueClone, issueDiv)
 
-  setTimeout(function () { template.classList.remove('adding') }, 3000)
+  setTimeout(function () { issueClone.classList.remove('adding') }, 3000)
 })
 
 window.onload = function () {
@@ -73,7 +87,10 @@ window.onload = function () {
   hideBtn.forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault()
-      btn.parentNode.parentNode.classList.add('hidden')
+      btn.parentNode.parentNode.parentNode.removeChild(btn.parentNode.parentNode)
     })
   })
+
+  let dropdowns = document.querySelector('.dropdown-trigger')
+  M.Dropdown.init(dropdowns)
 }
