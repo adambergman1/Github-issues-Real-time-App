@@ -56,12 +56,6 @@ footer {
     padding: 5px;
 }
 
-.list-of-issues .issue-description .description {
-	max-height: 60px;
-    overflow-y: scroll;
-    color: #333;
-}
-
 .issue-comments, .issue-state, .issue-date {
     color: #666;
 }
@@ -86,13 +80,48 @@ footer {
     min-height: 380px;
     max-height: 380px;
     height: 380px;
-    margin-left: auto;
-    left: auto;
-    right: auto;
     float: left;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    width: 48%;
+    width: 49%;
+}
+
+.fullwidth {
+    width: 100% !important;
+}
+
+.bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bar .sorting a {
+    color: #333;
+    background: #eee;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+.bar .sorting a svg {
+    width: 2em;
+}
+
+.list-of-issues.two-rows .issue:nth-child(odd) {
+    margin: 0 0 10px 0;
+}
+
+.list-of-issues.two-rows .issue .issue-title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.list-of-issues .issue-description .description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
 }
 
 .list-of-issues.two-rows .issue .issue-title a {

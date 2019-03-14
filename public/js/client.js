@@ -78,6 +78,7 @@ socket.on('newIssue', issue => {
 })
 
 window.onload = function () {
+  // Remove an issue when close element is clicked
   let hideBtn = document.querySelectorAll('.issue-hide-show a')
   hideBtn.forEach(btn => {
     btn.addEventListener('click', e => {
@@ -86,6 +87,25 @@ window.onload = function () {
     })
   })
 
+  // Enable dropdown functionality
   let dropdowns = document.querySelector('.dropdown-trigger')
   M.Dropdown.init(dropdowns)
+
+  // Sorting functionality - grid or list view
+  const issues = document.querySelectorAll('.list-of-issues .issue')
+  const gridViewBtn = document.querySelector('.sorting .toggle-view.grid')
+  gridViewBtn.addEventListener('click', e => {
+    e.preventDefault()
+    issues.forEach(issue => {
+      issue.classList.remove('fullwidth')
+    })
+  })
+
+  const listViewBtn = document.querySelector('.sorting .toggle-view.list')
+  listViewBtn.addEventListener('click', e => {
+    e.preventDefault()
+    issues.forEach(issue => {
+      issue.classList.add('fullwidth')
+    })
+  })
 }
