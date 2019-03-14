@@ -1,13 +1,16 @@
 const socket = window.io.connect()
 
+let counter = 0
+
 socket.on('addComment', issue => {
   // Increasing comment count with one
   const currentIssueComments = document.querySelector(`#issue-${issue.id} .issue-comments`)
   currentIssueComments.textContent = issue.comments + 1
   currentIssueComments.classList.add('adding')
 
+  counter++
   const notificationBtn = document.querySelector('.dropdown-trigger.btn')
-  notificationBtn.textContent = `New notification!`
+  notificationBtn.textContent = `Notifications (${counter})`
   notificationBtn.classList.remove('disabled')
 
   const notifications = document.querySelector('.notifications')
@@ -75,14 +78,6 @@ socket.on('newIssue', issue => {
 })
 
 window.onload = function () {
-  // const stateDiv = document.querySelectorAll('.issue-state')
-
-  // stateDiv.forEach(state => {
-  //   if (state.textContent === 'closed') {
-  //     state.parentNode.classList.add('removed')
-  //   }
-  // })
-
   let hideBtn = document.querySelectorAll('.issue-hide-show a')
   hideBtn.forEach(btn => {
     btn.addEventListener('click', e => {
