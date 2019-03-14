@@ -12,21 +12,19 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h3>Your issues</h3> 
+      <h3>Your issues</h3>
+        <div class="bar">
+          <div class="notices">
+            <a href="#" data-target="dropdown" class="dropdown-trigger btn disabled"><i class="fas fa-bell" title="No new notifications"></i></a>
+            </div>
+
+            <div class="sorting">
+              <a class="toggle-view grid" href="#"><i class="fas fa-th-large"></i></a>
+              <a class="toggle-view list" href="#"><i class="fas fa-grip-lines"></i></a>
+            </div>
+        </div>
  <div class="list-of-issues two-rows">
     {{#if issues.length}}
-
-    <div class="bar">
-    <div class="notices">
-      <a href="#" data-target="dropdown" class="dropdown-trigger btn disabled"><i class="fas fa-bell" title="No new notifications"></i></a>
-      </div>
-
-      <div class="sorting">
-        <a class="toggle-view grid" href="#"><i class="fas fa-th-large"></i></a>
-        <a class="toggle-view list" href="#"><i class="fas fa-grip-lines"></i></a>
-      </div>
-    </div>
-    
     {{#each issues}}
           <div class="issue" id="issue-{{this.id}}">
             <span class="issue-hide-show"><a href="#">X</a></span>

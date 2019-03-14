@@ -36,6 +36,12 @@ footer {
     margin-bottom: 20px;
 }
 
+.list-of-issues {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
 .list-of-issues .adding {
     background-color: #2EC4B6 !important;
 }
@@ -71,23 +77,22 @@ footer {
 
 .list-of-issues.two-rows .issue {
     padding: 30px;
-    margin: 0 10px 10px 0;
+    margin-bottom: 10px;
     background: #011627;
     color: #666;
-    -webkit-box-shadow: 7px 4px 25px 1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 7px 4px 25px 1px rgba(0,0,0,0.75);
-    box-shadow: 7px 4px 25px 1px rgba(0,0,0,0.75);
     min-height: 380px;
     max-height: 380px;
     height: 380px;
-    float: left;
+    width: 49%;
+    -webkit-box-shadow: 7px 4px 25px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 4px 25px 1px rgba(0,0,0,0.75);
+    box-shadow: 7px 4px 25px 1px rgba(0,0,0,0.75);
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    width: 49%;
 }
 
 .fullwidth {
-    width: 100% !important;
+    width: 99% !important;
 }
 
 .bar {
@@ -104,10 +109,6 @@ footer {
 
 .bar .sorting a svg {
     width: 2em;
-}
-
-.list-of-issues.two-rows .issue:nth-child(odd) {
-    margin: 0 0 10px 0;
 }
 
 .list-of-issues.two-rows .issue .issue-title {
