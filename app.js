@@ -15,7 +15,8 @@ app.use(helmet.contentSecurityPolicy({
     styleSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com'],
     scriptSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com', 'use.fontawesome.com'],
     upgradeInsecureRequests: true,
-    workerSrc: false // This is not set.
+    workerSrc: false, // This is not set.
+    blockAllMixedContent: true
   }
 }))
 
@@ -32,9 +33,15 @@ app.use('/webhook', require('./routes/webhook'))
 
 // Set socket.io listeners
 const io = require('socket.io')(server)
+const updateIssue = require('./src/js/updateIssue')
 
 io.on('connection', socket => {
   console.log('Opened a websocket connection')
+
+  socket.on('close', data => {
+    console.log(data)
+    updateIssue(data)
+  })
 })
 app.set('socketio', io)
 

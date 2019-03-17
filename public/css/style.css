@@ -44,6 +44,15 @@ footer {
 
 .list-of-issues .adding {
     background-color: #2EC4B6 !important;
+    color: #333 !important;
+}
+
+.list-of-issues .adding a {
+    color: #000 !important;
+}
+
+.list-of-issues .adding .issue-description .description {
+    color: #333 !important; 
 }
 
 .list-of-issues .removing, .removed {
@@ -60,10 +69,6 @@ footer {
 
 .list-of-issues .removed td {
     padding: 5px;
-}
-
-.issue-comments, .issue-state, .issue-date {
-    color: #666;
 }
 
 .hidden {
@@ -144,12 +149,32 @@ footer {
     width: 100%;
 }
 
-.list-of-issues.two-rows .issue .issue-hide-show a {
-    float: right;
-    color: #E71D36;
+.list-of-issues.two-rows .issue .issue-state, .list-of-issues.two-rows .issue .comments {
+    display: inline-block;
+    width: 50%;
+}
+
+.list-of-issues.two-rows .issue .issue-comments.adding {
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.list-of-issues.two-rows .issue .issue-mark-closed {
+    color: #FF9F1C;
+}
+
+.list-of-issues.two-rows .issue .meta-data {
+    display: flex;
+    border: 1px solid #333;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .fa-external-link-alt {
     font-size: 13px;
     vertical-align: top;
+}
+
+h4 {
+    margin: .912rem 0;
 }

@@ -24,7 +24,8 @@ router.post('/', verifyGithubPayload, (req, res) => {
     state: body.issue.state,
     created: body.issue.created_at.substr(0, 10),
     time: body.issue.created_at.substr(11, 5),
-    url: body.issue.html_url
+    url: body.issue.html_url,
+    action: body.action
   }
 
   if (body.comment) {

@@ -27,7 +27,6 @@
     {{#if issues.length}}
     {{#each issues}}
           <div class="issue" id="issue-{{this.id}}">
-            <span class="issue-hide-show"><a href="#">X</a></span>
             <span class="issue-number">No. {{this.number}}</span>
             <h4 class="issue-title"><a href="{{this.url}}" target="_blank" class="issue-title-link">{{this.title}}</a></h4>
             <div class="issue-description">
@@ -38,9 +37,12 @@
                 <p class="description not-provided">No description provided.</p>
                 {{/unless}}
               </div>
+              <div class="meta-data">
             <p class="issue-state"><i class="fas fa-door-open" title="State"></i> {{this.state}}</p>
-            <div class="comments"><i class="fas fa-comments" title="Comments"></i> <span class="issue-comments">{{this.comments}}</span></div>
+            <p class="comments"><i class="fas fa-comments" title="Comments"></i> <span class="issue-comments">{{this.comments}}</span></p>
             <p class="issue-date"><i class="fas fa-clock" title="Created"></i> {{this.created}} {{this.time}}</p>
+              </div>
+            <a class="issue-mark-closed" href="#">Mark as closed <i class="far fa-times-circle"></i></a>
           </div>
     {{/each}}
     {{/if}}
