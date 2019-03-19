@@ -1,3 +1,10 @@
+/**
+ * Module that fetches data from GitHub
+ *
+ * @author Adam Bergman
+ * @version 1.0
+ */
+
 require('dotenv').config()
 
 const fetch = require('node-fetch')

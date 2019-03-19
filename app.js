@@ -11,7 +11,7 @@ app.use(helmet())
 
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    defaultSrc: ["'self'", 'https://www.youtube.com'],
+    defaultSrc: ["'self'"],
     styleSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com'],
     scriptSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com', 'use.fontawesome.com'],
     upgradeInsecureRequests: true,
@@ -37,7 +37,9 @@ const updateIssue = require('./src/js/updateIssue')
 
 io.on('connection', socket => {
   console.log('Opened a websocket connection')
+  console.log(socket.client.conn.readyState)
 
+  // Listener for closing issues
   socket.on('close', data => {
     console.log(data)
     updateIssue(data)

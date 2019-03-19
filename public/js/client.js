@@ -72,11 +72,13 @@ socket.on('newIssue', issue => {
 
   mainDiv.insertBefore(issueClone, issueDiv)
 
+  addNotification(issue)
+
   setTimeout(function () { issueClone.classList.remove('adding') }, 3000)
 })
 
 window.onload = function () {
-  // Remove an issue when close element is clicked and marks it as closed
+  // Remove the issue element and mark it as closed
   const markClosedBtn = document.querySelectorAll('.issue-mark-closed')
   markClosedBtn.forEach(btn => {
     btn.addEventListener('click', e => {
@@ -94,8 +96,8 @@ window.onload = function () {
   })
 
   // Enable dropdown functionality
-  let dropdowns = document.querySelector('.dropdown-trigger')
-  M.Dropdown.init(dropdowns)
+  const dropdown = document.querySelector('.dropdown-trigger')
+  M.Dropdown.init(dropdown)
 
   // Sorting functionality - grid or list view
   const issues = document.querySelectorAll('.list-of-issues .issue')
@@ -106,7 +108,6 @@ window.onload = function () {
       issue.classList.remove('fullwidth')
     })
   })
-
   const listViewBtn = document.querySelector('.sorting .toggle-view.list')
   listViewBtn.addEventListener('click', e => {
     e.preventDefault()

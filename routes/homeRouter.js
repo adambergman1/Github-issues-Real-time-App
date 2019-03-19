@@ -1,5 +1,5 @@
 /**
- * homeRouter.
+ * homeRouter that fetches issues from GitHub and sends them to the handlebars file with sorted data
  *
  * @author Adam Bergman
  * @version 1.0
@@ -10,7 +10,6 @@ const router = express.Router()
 
 const fetchGithub = require('../src/js/fetch')
 
-// Fetch all issues from Github and send them to the index hbs file
 router.get('/', async (req, res, next) => {
   const openIssues = await fetchGithub('https://api.github.com/repos/1dv023/ab224qr-examination-3/issues')
 
