@@ -1,4 +1,7 @@
+# GitIssues
+
 ## What is the URL to your application?
+
 https://cscloud328.lnu.se
 
 ## Förklara vad du har gjort för att göra appen säker, både i din kod och när du konfigurerat servern
@@ -34,11 +37,11 @@ Utöver ovanstående så kan man konfigurera Content Security Policy som hjälpe
 Borsett från Helmet så har jag implementerat en modul som kontrollerar att POST-anrop till servern kommer från GitHub. Detta genom att avläsa SHA-signaturen som GitHub skickar vid sin POST och jämför den med den SHA-signatur jag implementerat på servern.
 
 ### På servern:
+
 * Installerat SSL-certifikat från Let's Encrypt
 * Dolt Powered-by headern genom att sätta "server_tokens off". Tack vare det kan man inte avläsa att Ubuntu körs på servern utan enbart nginx.
-* Aktiverat den inbyggda brandväggen i Ubuntu och endast tillåtit anslutningar över SSH, HTTP och HTTPS.
+* Aktiverat den inbyggda brandväggen i Ubuntu och endast tillåtit anslutningar över SSH, HTTP och HTTPS. Detta gör att vår server som är bakom vår reversed proxy inte kan kommas åt utifrån eftersom anslutningar endast tillåts på port 80, 443 och 22.
 * Installerat och kört verktyget Wapiti som kontrollerar om det finns några säkerhetshål. Wapiti kan bland annat upptäcka följande sårbarheter:
-
 	* SQL-injektioner
 	* XSS
 	* Svaga .htaccess konfigurationer
@@ -71,19 +74,21 @@ Jag använder mig av environmentvariablar för att placera min access token och 
 
 ## Hur skiljer sig din app från i produktion till utveckling?
 
-Under utveckling kan jag inte få live-uppdateringar för mina issues från GitHub eftersom webhooken är registrerad på domännamnet på servern. Därför går det endast att hämta issues men inte att få uppdateringar utan att ladda om sidan.
+Under utveckling kan jag inte få live-uppdateringar för mina issues från GitHub eftersom webhooken är registrerad på domännamnet på servern. Därför går det endast att hämta issues men inte att få uppdateringar utan att ladda om sidan. Lokalt använder jag mig av NGROK som reversed proxy för att kunna arbeta effektivt och kunna testa webhooket mot den URL som NGROK genererar.
 
 ## Vilka extra moduler har du använt dig av? Motivera varför du valt att använda just dem och hur du har säkerställt att de är säkra nog för att sättas i produktion.
 
 * Body Parser: används för att hämta data från GitHub i JSON-format.
 * Dotenv: används för att kunna sätta egna environmentvariablar.
 * Express: används för att ha en server körandes. 
-* Express Handlebars: används för att kunna använda templates, kunna återanvända sidhuvud och sidfot och applicera kod till html på ett enkelt sätt.
+* Express Handlebars: används för att kunna skapa templates, kunna återanvända sidhuvud och sidfot och applicera kod till html på ett enkelt sätt.
 * Helmet: används för att öka säkerheten på servern (Express)
 * Node-fetch: används för att kunna hämta data från GitHub
 * Production: används för att kunna pusha upp ändringar till produktionsmiljön
 * Socket.io: används för att öppna en websocket mellan servern och klienten och på så sätt få dem att kommunicera för att uppdatera HTML-dokument.
 * Standard: används för att säkra att standard JavaScript-syntax efterföljs.
+* Crypto: inbyggd modul i Node.js som används för att hasha signaturen som verifieras mot den signatur som skickas från GitHub.
+* Wapiti: Verktyg för att upptäcka säkerhetshål.
 * Nodemon - en dev-dependancy som endast används i utvecklingsmiljön för att servern ska startas om vid varje ändring i kod.
 
 Anldeningen varför jag har valt att använda ovanstående moduler är för att de är populära, det finns mycket dokumentation kring dem för att underlätta utvecklingsprocessen samt för att upptäcka om det finns några kända säkerhetsrisker med dem. Jag har även kört "npm audit" för att upptäcka eventuella säkerhetshål men NPM har inte funnit några.
@@ -94,5 +99,7 @@ Som utökad funktionalitet har jag gjort följande:
 
 * Användaren kan växla mellan listvy och kolumnvy
 * Användaren får notiser om det sker någon ändring bland issues. En notis kommer om ett nytt issue läggs till, om en issue blir stängd, får en ny kommentar eller om en issue återöppnas.
+* Implementerat kod för alla issue-events, inte bara för nya issues.
 * Användaren kan stänga ett issue direkt från klienten
 * Vid ändring på ett befintligt issue så visas en separat CSS-stil på det element som uppdaterats. Exempelvis om en kommentar lagts till eller tagits bort. Om en ny issue dyker upp så får hela issue:t en unik bakgrundsfärg i tre sekunder innan den får samma stil som övriga issues.
+* Eget SSL-certifikat via Let's Encrypt istället för egensignerat.
